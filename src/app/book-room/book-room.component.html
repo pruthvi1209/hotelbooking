@@ -1,0 +1,74 @@
+<div>
+  <div id="bookingForm">
+    <form [formGroup]="hotelGroup" #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+
+      <mat-form-field>
+        <mat-select placeholder="Select City" formControlName="city" required #city>
+          <mat-option *ngFor="let city of cities" [value]="city">
+            {{city}}
+          </mat-option>
+        </mat-select>
+        <mat-error>Please Select A City</mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-select placeholder="Select Hotel" formControlName="selectHotel" required (click)="getErrors()">
+          <mat-option *ngFor="let hotel of filterHotels" [value]="hotel.name">
+            {{hotel.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error>Please Select Hotel</mat-error>
+      </mat-form-field>
+
+      <mat-form-field >
+        <input matInput [min]="checkInMinDate"  [matDatepicker]="picker"  [max] ="checkInMaxDate" placeholder="Check-in date"
+          formControlName="startDatePicker" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf ="!dateMisMatch">Select Check-in</mat-error>
+        <mat-error *ngIf ="dateMisMatch">Check-IN Date Should be earlier than Check-Out date</mat-error>
+      </mat-form-field>
+      
+      <mat-form-field >
+        <input matInput [min]="checkInMinDate" [max]="maxDate" [matDatepicker]="picker1" placeholder="Check-out date"
+          formControlName="endDatePicker" required>
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+        <mat-error>Select Check-out</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Number of Rooms</mat-label>
+        <input type="number" matInput placeholder="Number of Rooms" formControlName="rooms" [min]="1" required>
+        <mat-error>Enter No.of Rooms</mat-error>
+      </mat-form-field>
+
+      <button type="submit" mat-raised-button type="submit">Book Room</button>
+      <button type="reset" mat-raised-button >Cancel</button>
+    </form>
+  </div>
+</div>
+
+<ng-template #errorDialog>
+  <h2 matDialogTitle>Booking Failed</h2>
+  <mat-dialog-content>
+    <p>Rooms are not available in {{selectedHotel.name}} Hotel from {{startDate}} to {{endDate}} </p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose color="primary" (click)="clearForm()">Dismiss</button>
+  </mat-dialog-actions>
+</ng-template>
+
+<ng-template #successDialog>
+  <h2 matDialogTitle>Booking Success</h2>
+  <mat-dialog-content>
+    <p>Your booking in {{selectedHotel.name}} Hotel from {{startDate}} to {{endDate}} for {{formData.value.rooms}}
+      room(s) is successful </p>
+    <p>Use bookind id : {{bookingNumber}} for future referance</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose color="primary" (click)="successBooking()">Pay {{bookingPrice}}</button>
+  </mat-dialog-actions>
+</ng-template>

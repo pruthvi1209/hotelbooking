@@ -1,0 +1,18 @@
+<section class="signUpForm">
+    <form fxLayout="column" fxLayoutAlign="center center" #f="ngForm" (ngSubmit)="onSignUp(f)" fxLayoutGap="3%">
+        <mat-form-field appearance="outline">
+            <mat-label>EMAIL</mat-label>
+            <input type="email" matInput placeholder="Your Email" ngModel name="email" email required>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput placeholder="Your Password" ngModel name="password" minlength="6" required>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid" >Login/ Register</button>
+        <button type="reset" mat-raised-button color="primary">Cancel</button>        
+    </form>
+<div fxLayout="row"><hr>Or<hr></div>
+<div class="social" fxLayout="row" fxLayoutAlign="center center"  fxLayoutGap="10px">
+    <button mat-fab (click)= "socailLogin()">Google</button>
+</div>
+</section>

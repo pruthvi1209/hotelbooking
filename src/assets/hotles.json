@@ -1,0 +1,90 @@
+[
+        {
+            "id"        :   "001",
+            "name"      :   "Kalisi",
+            "city"      :   "Hyderabad",
+            "available" :   10,
+            "rating"    :   3.5,
+            "price"     :   1600
+        },
+        {
+            "id"        :   "002",
+            "name"      :   "Ocean view",
+            "city"      :   "Trivandrum",
+            "available" :   5,
+            "rating"    :   4.5,
+            "price"     :   2600
+        },
+        {
+            "id"        :   "003",
+            "name"      :   "Taj Residency",
+            "city"      :   "Hyderabad",
+            "available" :   5,
+            "rating"    :   4.5,
+            "price"     :   5600
+        },
+        {
+            "id"        :   "004",
+            "name"      :   "Falaknama Palace",
+            "city"      :   "Hyderabad",
+            "available" :   5,
+            "rating"    :   4.5,
+            "price"     :   7600
+        },
+        {
+            "id"        :   "005",
+            "name"      :   "Key Select Hotels",
+            "city"      :   "Trivandrum",
+            "available" :   5,
+            "rating"    :   4,
+            "price"     :   3716
+        },
+        {
+            "id"        :   "006",
+            "name"      :   "Hilton Garden Inn Trivandrum",
+            "city"      :   "Trivandrum",
+            "available" :   5,
+            "rating"    :   4,
+            "price"     :   6500
+        },
+        {
+            "id"        :   "007",
+            "name"      :   "The Ruby Arena",
+            "city"      :   "Trivandrum",
+            "available" :   5,
+            "rating"    :   4,
+            "price"     :   2700
+        },
+        {
+            "id"        :   "008",
+            "name"      :   "Ginger Hotel",
+            "city"      :   "Hyderabad",
+            "available" :   5,
+            "rating"    :   4,
+            "price"     :   7700
+        },
+        {
+            "id"        :   "010",
+            "name"      :   "Hampshire Plaza Hotel",
+            "city"      :   "Hyderabad",
+            "available" :   5,
+            "rating"    :   4,
+            "price"     :   9700
+        },
+        {
+            "id"        :   "011",
+            "name"      :   "Madina Residency",
+            "city"      :   "Hyderabad",
+            "available" :   5,
+            "rating"    :   4.6,
+            "price"     :   1700
+        },
+        {
+            "id"        :   "012",
+            "name"      :   "Madina Residency",
+            "city"      :   "Hyderabad",
+            "available" :   5,
+            "rating"    :   4.6,
+            "price"     :   700
+        }
+]

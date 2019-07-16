@@ -1,0 +1,96 @@
+ checkHotelVacancy(noOfDays, hotelRooms, reqRooms, checkInDate): Promise<any> {
+  let allowBooking = true;
+  const roomsStatus = new Array(noOfDays);
+  return new Promise((resolve, reject) => {
+    for (let i = 0 ; i <= noOfDays; i++) {
+      const date = new Date();
+       const data = this.hotelService.getHistory(this.selectedHotel.id, this.getDateFormat(date.setDate(checkInDate.getDate() + i)));
+       data.subscribe((value) => {
+         if (hotelRooms < reqRooms || value < reqRooms) {
+           console.log(hotelRooms , reqRooms);
+            allowBooking = false;
+            reject('rooms alredy booked');
+         }
+          roomsStatus[i] = value ? value : 0;
+       },
+       (e) => {},
+       () => {
+       const timer = setInterval(() => {
+        if (i === noOfDays && allowBooking && roomsStatus.length - 1 === noOfDays ) {
+          console.log('Resolved', roomsStatus );
+          clearInterval(timer);
+          resolve(roomsStatus);
+        } else {
+        console.log('timer fired',i,noOfDays, roomsStatus.length, allowBooking);
+        }
+      }, 2000);
+      }
+    );
+  }
+});
+}
+}
+
+
+
+ //   checkHotelAvailbality(requiredRooms) {
+  //     return requiredRooms <= this.selectedHotel.available;
+  //   }
+  //   updateDataBase(id, latestCheckIn, latestCheckOut, maxCheckOut, blockedRooms,
+  //     availableRooms, roomsAvailableAfterCheckOut, maxRoomsBlocked) {
+  //     this.dialog.open(this.successDialog);
+  //     this.hotelService.register({
+  //       id: id,
+  //       latestCheckIn: latestCheckIn.toDateString(),
+  //       latestCheckOut: latestCheckOut.toDateString(),
+  //       maxCheckOut: maxCheckOut.toDateString(),
+  //       blockedRooms: blockedRooms,
+  //       availableRooms: availableRooms,
+  //       roomsAvailableAfterCheckOut: roomsAvailableAfterCheckOut,
+  //       maxRoomsBlocked: maxRoomsBlocked
+  //     });
+  //   }
+  //   notFirstUser() {
+  //     const dbLatestCheckOutDate = new Date(this.dbData.latestCheckOut);
+  //     const dbLatestCheckInDate = new Date(this.dbData.latestCheckIn);
+  //     const dbMaxCheckOutDate = new Date(this.dbData.maxCheckOut);
+  //     const latestCheckIn = this.formData.value.startDatePicker < dbLatestCheckInDate ?
+  //       this.formData.value.startDatePicker : dbLatestCheckInDate;
+  //     const latestCheckOut = this.formData.value.endDatePicker < dbLatestCheckOutDate ?
+  //       this.formData.value.endDatePicker : dbLatestCheckOutDate;
+  //     const maxCheckOut = this.formData.value.endDatePicker < dbMaxCheckOutDate ?
+  //       dbMaxCheckOutDate : this.formData.value.endDatePicker;
+  //     const maxRoomsBlocked = this.formData.value.endDatePicker < dbMaxCheckOutDate ?
+  //       this.dbData.maxRoomsBlocked : this.formData.value.rooms;
+  //     if (this.formData.value.endDatePicker < dbLatestCheckInDate || this.formData.value.startDatePicker > dbMaxCheckOutDate) {
+  //       if (this.selectedHotel.available >= this.formData.value.rooms) {
+  //         const blockedRooms = this.formData.value.rooms;
+  //         const availableRooms = this.selectedHotel.available - blockedRooms;
+  //         const roomsAfterCheckOut = availableRooms + this.formData.value.rooms;
+  //         this.updateDataBase(this.selectedHotel.id, latestCheckIn,
+  //           latestCheckOut, maxCheckOut, blockedRooms, availableRooms, roomsAfterCheckOut, maxRoomsBlocked);
+  //       } else {
+  //         alert('else case');
+  //       }
+  //     } else {
+  //       if (this.dbData.availableRooms >= this.formData.value.rooms) {
+  //         const blockedRooms = this.dbData.blockedRooms + this.formData.value.rooms;
+  //         const availableRooms = this.selectedHotel.available - blockedRooms;
+  //         const roomsAfterCheckOut = this.formData.value.endDatePicker < dbLatestCheckOutDate ?
+  //           this.selectedHotel.available - (blockedRooms - this.formData.value.rooms) :
+  //           this.selectedHotel.available - (this.dbData.blockedRooms - this.formData.value.rooms);
+  //         this.updateDataBase(this.selectedHotel.id, latestCheckIn,
+  //           latestCheckOut, maxCheckOut, blockedRooms, availableRooms, roomsAfterCheckOut, maxRoomsBlocked);
+  //       } else if (this.formData.value.startDatePicker > dbLatestCheckOutDate &&
+  //         this.dbData.roomsAvailableAfterCheckOut <= this.formData.value.rooms &&
+  //         this.formData.value.rooms + this.dbData.maxRoomsBlocked <= this.selectedHotel.available) {
+  //         const blockedRooms = this.dbData.maxRoomsBlocked + this.formData.value.rooms;
+  //         const availableRooms = this.dbData.availableRooms;
+  //         const roomsAfterCheckOut = this.dbData.availableRooms + this.formData.value.rooms;
+  //         this.updateDataBase(this.selectedHotel.id, latestCheckIn,
+  //           latestCheckOut, maxCheckOut, blockedRooms, availableRooms, roomsAfterCheckOut, maxRoomsBlocked);
+  //       } else {
+  //         this.dialog.open(this.errorDialog);
+  //       }
+  //     }
+  //   }
